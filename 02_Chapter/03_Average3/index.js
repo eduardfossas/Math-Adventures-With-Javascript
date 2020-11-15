@@ -1,9 +1,3 @@
-function sum(range) {
-    let running_sum = 0;
-    for(let i = 0; i <= range; i++) {
-      running_sum += i ** 2 + 1;
-    } 
-    return running_sum;
-  }
+const average = (range) => [...range].reduce((acc, curr) => acc + curr) / range.length
   
-  console.log(sum(20))
+console.log(average([8,11,15]))
