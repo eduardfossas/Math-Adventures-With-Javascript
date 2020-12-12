@@ -14,13 +14,13 @@ function radians(angle) {
 let t = 0;
 
 function draw() {
-    
-    ctx.rotate(t)
     ctx.clearRect(0 - canvas.width / 2, 0 - canvas.height / 2, canvas.width, canvas.height);
 
     for(let i = 0; i < 12; i++) {
         ctx.beginPath()
-        ctx.rect(200, 0, 50,50)
+        ctx.translate(200,0)
+        ctx.rotate(radians(t))
+        ctx.rect(0, 0, 50,50)
         ctx.rotate(radians(360) / 12)
         ctx.stroke()
     }
