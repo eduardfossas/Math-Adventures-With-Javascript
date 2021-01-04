@@ -11,6 +11,7 @@ const PURPLE = `rgb(102,0,204)`
 let sheepList = [];
 let grassList = []
 let patchSize = 10;
+
 class Grass {
     constructor(x,y,sz) {
         this.x = x;
@@ -21,11 +22,15 @@ class Grass {
     }
 
     update() {
-        fillStyle = GREEN
+        if(this.eaten) CTX.fillStyle = BROWN
+        CTX.fillStyle = GREEN
+        CTX.beginPath()
         CTX.rect(this.x,this.y,this.sz,this.sz)
+        CTX.closePath()
         CTX.fill()
     }
 }
+
 class Sheep {
     constructor(x, y) {
         this.x = x
@@ -58,17 +63,19 @@ function setup() {
     CANVAS.width = 600
     CANVAS.height = 600
     document.body.appendChild(CANVAS)
-    shawn = new Sheep(300,300)
 
     for(let i =0; i < 3; i++) {
         sheepList.push(new Sheep(random(0,CANVAS.width), random(0, CANVAS.height)))
     }
+
+    for(let x = 0; x < CANVAS.width; x += patchSize) {
+        for(let y = 0; y < CANVAS.height; y += patchSize) {
+            grassList.push(new Grass(x,y,10))
+        }
+    }
 }
 
 function draw() {
-    CTX.fillStyle = 'black'
-    CTX.rect(0, 0, CANVAS.width, CANVAS.height)
-    CTX.fill()
     for(sheep of sheepList) {
         sheep.update()
     }
